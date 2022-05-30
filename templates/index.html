@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block body %}
+<div>
+    <div>
+        <!-- <img  src="{{url_for('static', filename='yt2sp_logo.png')}}" /> -->
+        <h1> YT2SP: Music reimagined</h1>
+    </div>
+    <div>
+        <ol>
+            {% for item in value %}
+            <li>{{item}}</li>
+            {% endfor %}
+        </ol>
+        
+        <form action="http://localhost:5000/" method = "post">
+            <p>Enter the Youtube playlist's URL</p>
+            <input type="text" name="yt_url" id="yt_url">
+            <p>Enter a Spotify playlist name</p>
+            <input type="text" name="sp_playlist_name" id="sp_playlist_name">
+            <p>Enter a Spotify playlist description</p>
+            <input type="text" name="sp_playlist_description" id="sp_playlist_description">
+            <div>
+                <input type="submit" value="Blast Off!">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
