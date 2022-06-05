@@ -41,7 +41,7 @@ class Spotify:
             redirect_uri='http://localhost:8888/callback')
         return token
 
-    def get_song_uri(self, artist: str, song_name: str):
+    def get_song_uri(self, artist: str, song_name: str, access_token):
         q = f'artist:{artist} track:{song_name}'
         query = f'https://api.spotify.com/v1/search?q={q}&type=track&limit=1'
 
@@ -49,7 +49,7 @@ class Spotify:
             query,
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}"
+                "Authorization": f"Bearer {access_token}"
             }
         )
 
@@ -64,7 +64,7 @@ class Spotify:
 
         return items[0]['uri']#[14:]
 
-    def create_playlist(self, playlist_name, playlist_description):
+    def create_playlist(self, playlist_name, playlist_description, access_token):
 
         request_body = {
             "name": playlist_name,
@@ -79,20 +79,20 @@ class Spotify:
             json=request_body,
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}"
+                "Authorization": f"Bearer {access_token}"
             }
         )
 
         playlist = response.json()
         return playlist['id']
 
-    def add_song_to_playlist(self, song_uri, playlist_id):
+    def add_song_to_playlist(self, song_uri, playlist_id, access_token):
         url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
         response = requests.post(
             url,
             json={"uris": [song_uri]},
             headers={
-                "Authorization": f"Bearer {self.token}",
+                "Authorization": f"Bearer {access_token}",
                 "Content-Type": "application/json"
             }
         )
