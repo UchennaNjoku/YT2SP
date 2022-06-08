@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/success.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -11,18 +11,15 @@
 <div class="container">
     <div class="overall-card">
         <div class="greeting text-lg">
-            <h1>Success!</h1>
-            <p>We created your playlist</p>
+            <h1>Welcome to Yt2Sp</h1>
         </div>
         <div class="welcome-container">
-            <form action="/index" method = "post">
-                <div class="create-another" >
-                    <input class="submit-button top-btn" type="submit" value="Create another">
+            <form action="/login" method = "post">
+                <div class="get-started" >
+                    <input class="submit-button" type="submit" value="Get Started">
                 </div>
             </form>
-            <a class="submit-button bottom-btn" href="https://open.spotify.com/">View Spotify playlist</a>
         </div>
     </div>
 </div>
 {% endblock %}
-

@@ -6,6 +6,7 @@ from youtube_title_parse import get_artist_title
 from os import getenv
 from dotenv import load_dotenv
 import requests
+import time
 
 
 load_dotenv()
@@ -23,17 +24,25 @@ SHOW_DIALOG = True
 CLIENT_ID = getenv('SPOTIPY_CLIENT_ID', None)
 CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET', None)
 
+
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    return render_template("home.html")
+
+
 # authorization-code-flow Step 1. Have your application request authorization; 
 # the user logs in and authorizes access
-@app.route("/")
+'''UNCOMMENT THE APP ROUTE WITH A LOGIN ROUTE INSTEAD'''
+@app.route("/login" , methods=['POST', 'GET'])
 def verify():
     auth_url = f'{API_BASE}/authorize?client_id={CLIENT_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
     print(auth_url)
     return redirect(auth_url)
 
-@app.route("/index")
-def index():
-    return render_template("index.html")
+
+@app.route("/form", methods=['POST', 'GET'])
+def form():
+    return render_template("form.html")
 
 # authorization-code-flow Step 2.
 # Have your application request refresh and access tokens;
@@ -56,7 +65,7 @@ def api_callback():
     print(res.json())
     session["toke"] = res_body.get("access_token")
 
-    return redirect("index")
+    return redirect("form")
 
 @app.route("/go", methods=['POST'])
 def go():
@@ -109,7 +118,7 @@ def go():
 
 @app.route('/success', methods=['GET', 'POST'])        
 def success():
-    return render_template('succcess.html')
+    return render_template('success.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
