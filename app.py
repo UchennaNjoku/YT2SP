@@ -17,7 +17,7 @@ sp = Spotify()
 yt = Youtube()
 
 API_BASE = 'https://accounts.spotify.com'
-REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
+REDIRECT_URI = "https://yt2sp.herokuapp.com/api_callback"
 SCOPE = 'playlist-modify-public'
 SHOW_DIALOG = True
 
@@ -56,7 +56,7 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"http://127.0.0.1:5000/api_callback",
+        "redirect_uri":"https://yt2sp.herokuapp.com/api_callback",
         "client_id":CLIENT_ID,
         "client_secret":CLIENT_SECRET
         })
