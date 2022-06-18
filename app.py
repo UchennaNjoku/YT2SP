@@ -11,7 +11,7 @@ import time
 
 load_dotenv()
 app = Flask(__name__)
-app.secret_key="xyz"
+app.secret_key="sessionkey"
 
 sp = Spotify()
 yt = Youtube()
@@ -36,7 +36,6 @@ def home():
 @app.route("/login" , methods=['POST', 'GET'])
 def verify():
     auth_url = f'{API_BASE}/authorize?client_id={CLIENT_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
-    print(auth_url)
     return redirect(auth_url)
 
 
@@ -67,7 +66,7 @@ def api_callback():
 
     return redirect("form")
 
-@app.route("/go", methods=['POST'])
+@app.route("/go", methods=['POST', 'GET'])
 def go():
 
     # GET THE VARIABLES FROM FORM
