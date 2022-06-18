@@ -28,7 +28,15 @@ class Youtube:
 
 
     def get_playlist_id(self, url):
-        playlist_identification = url[38:]
+        
+        #checks different forms of urls containing playlist id 
+        #splices the strng for id only
+        if len(url) == 72:
+            playlist_identification = url[38:]
+        elif len(url) == 68:
+            playlist_identification = url[34:]
+        else:
+            playlist_identification = url[26:]
         return playlist_identification
 
 
