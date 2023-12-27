@@ -28,16 +28,12 @@ class Youtube:
 
 
     def get_playlist_id(self, url):
-        
-        #checks different forms of urls containing playlist id 
-        #splices the strng for id only
-        if len(url) == 72:
-            playlist_identification = url[38:]
-        elif len(url) == 68:
-            playlist_identification = url[34:]
+        # This regex looks for a 'list=' parameter and captures the ID that follows
+        match = re.search(r"list=([a-zA-Z0-9_-]+)", url)
+        if match:
+            return match.group(1)
         else:
-            playlist_identification = url[26:]
-        return playlist_identification
+            raise ValueError("Could not extract playlist ID from URL")
 
 
 

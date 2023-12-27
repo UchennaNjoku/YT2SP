@@ -1,0 +1,17 @@
+.waveanim {
+    animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+    animation-duration: 3s;        /* Smooth and slow waving */
+    animation-iteration-count: infinite;  /* Continuous waving */
+    transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+    display: inline-block;
+}
+
+@keyframes wave-animation {
+    0%, 100% { transform: rotate(0deg); } /* Starting and ending at the same position */
+    10% { transform: rotate(10deg); }  /* Less extreme waving */
+    20% { transform: rotate(-5deg); }
+    30% { transform: rotate(10deg); }
+    40% { transform: rotate(-5deg); }
+    50% { transform: rotate(8deg); }
+    60% { transform: rotate(0deg); }  /* Gentle return to the starting position */
+}

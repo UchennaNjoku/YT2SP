@@ -7,17 +7,20 @@ from os import getenv
 from dotenv import load_dotenv
 import requests
 import time
+from flask_cors import CORS
 
 
 load_dotenv()
 app = Flask(__name__)
 app.secret_key="sessionkey"
 
+CORS(app)
+
 sp = Spotify()
 yt = Youtube()
 
 API_BASE = 'https://accounts.spotify.com'
-REDIRECT_URI = "https://yt2sp.herokuapp.com/api_callback"
+REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
 SCOPE = 'playlist-modify-public'
 SHOW_DIALOG = True
 
@@ -25,9 +28,14 @@ CLIENT_ID = getenv('SPOTIPY_CLIENT_ID', None)
 CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET', None)
 
 
-@app.route("/", methods=['GET', 'POST'])
+# @app.route("/", methods=['GET', 'POST'])
+# def home():
+#     return render_template("home.html")
+
+
+@app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("index.html")
 
 
 # authorization-code-flow Step 1. Have your application request authorization; 
@@ -55,7 +63,7 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"https://yt2sp.herokuapp.com/api_callback",
+        "redirect_uri":"http://127.0.0.1:5000/api_callback",
         "client_id":CLIENT_ID,
         "client_secret":CLIENT_SECRET
         })
