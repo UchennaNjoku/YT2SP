@@ -1,41 +1,173 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
 {% endblock %}
 
 {% block body %}
-<div class="background-container">
-    <img src="../static/src/pexels-scott-webb-1190906.jpg" class="leaf-background" alt="background">
-</div>
-<div class="container">
-    <div class="overall-card">
-        <div class="greeting text-lg">
-            <h1>Hello</h1>
+
+
+
+<div class="relative overflow-hidden min-h-screen w-screen bg-gradient-to-r from-slate-900 to-slate-950 flex flex-col">
+    <nav class="h-1/12 p-4 lg:px-10 lg:py-4 w-screen flex items-center justify-between">
+        <a href="/" class="text-xl md:text-2xl ml-2 mb-1 bg-gradient-to-r from-slate-800 to-slate-900 bg-clip-text text-transparent font-poppins">yt2sp</a>
+        <div>
+            <a class="cursor-pointer text-sm md:text-base transition-all hover:text-slate-700 text-slate-800 p-2 font-medium" href="/about">about us</a>
+            <a class="cursor-pointer text-sm md:text-base transition-all hover:text-slate-700 text-slate-800 p-2 font-medium" href="https://github.com/UchennaNjoku">other projects</a>
         </div>
-        <div class="form-container">
-            <form action="/go" method = "post">
-                <input type="text" class="text-box" name="yt_url" id="yt_url" placeholder="Enter the Youtube playlist URL">
-                <input type="text" class="text-box" name="sp_playlist_name" id="sp_playlist_name" placeholder="Enter your playlist name">
-                <input type="text" class="text-box"  name="sp_playlist_description" id="sp_playlist_description" placeholder="Enter a playlist description">
-                <div class="blast-off" >
-                    <input class="submit-button" type="submit" onclick="spinner()" value="Blast Off!">
+    </nav>
+
+    <div role="alert" id="customAlert" class="opacity-0 transition-all w-fit self-center">
+        <div id="alertContent" class="relative [&amp;>svg~*]:pl-7 [&amp;>svg+div]:translate-y-[-3px] [&amp;>svg]:absolute [&amp;>svg]:left-4 [&amp;>svg]:top-4 [&amp;>svg]:text-foreground bg-gray-800 text-red-500 border-red-500 border-2 rounded-lg p-4 flex items-center space-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-red-600"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            <h5 id="alertText" class="mb-1 leading-none tracking-tight text-red-500 font-semibold">
+                
+            </h5>
+            <button id="dismissButton" class="inline-flex items-center justify-center rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-red-500 border-red-500 font-semibold">
+                Dismiss
+            </button>
+        </div>
+    </div>
+
+    <div class="p-3 flex flex-row items-center align-middle self-center justify-center content-center min-w-screen text-white flex-grow">
+        <div class="flex flex-col items-center w-full">
+            <h1 class="text-lg sm:text-2xl md:text-3xl mb-5 text-gray-200">Your YouTube to Spotify Playlist Converter</h1>
+            <p id="slogan" class="text-sm md:text-lg text-gray-600 mb-10">Convert your favorite YouTube playlist into a Spotify playlist.</p>
+            <form id="playlistForm" method = "post" class="w-full flex flex-col items-center justify-center">
+                <div id="url_div" class="flex w-full max-w-lg items-center space-x-2 mb-10 bg-gray-800 bg-opacity-20 rounded-lg p-2">
+                    <input
+                      name="yt_url"
+                      id="yt_url"
+                      placeholder="Enter YouTube Playlist URL"
+                      class="flex-grow px-4 rounded-lg border-transparent focus:border-gray-700 focus:ring-1 focus:ring-gray-700 focus:ring-opacity-30 bg-transparent text-white"
+                      type="url"
+                    />
                 </div>
-                <div class="spinner">
-                    <div class="spinner-container">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
-                    <p class="loading-text">one sec :)</p>
+                <div id="name_div" class="flex w-full max-w-lg items-center space-x-2 mb-10 bg-gray-800 bg-opacity-20 rounded-lg p-2">
+                    <input
+                      name="sp_playlist_name"
+                      id="sp_playlist_name"
+                      placeholder="Enter Spotify Playlist Name"
+                      class="flex-grow px-4 rounded-lg border-transparent focus:border-gray-700 focus:ring-1 focus:ring-gray-700 focus:ring-opacity-30 bg-transparent text-white"
+                      type="text"
+                    />
                 </div>
+                <div id="description_div" class="flex w-full max-w-lg items-center space-x-2 mb-10 bg-gray-800 bg-opacity-20 rounded-lg p-2">
+                    <input
+                      name="sp_playlist_description"
+                      id="sp_playlist_description"
+                      placeholder="Enter Spotify Playlist Description"
+                      class="flex-grow px-4 rounded-lg border-transparent focus:border-gray-700 focus:ring-1 focus:ring-gray-700 focus:ring-opacity-30 bg-transparent text-white"
+                      type="text"
+                    />
+                </div>
+                <input id="submitButton" class="cursor-pointer w-fit flex flex-row items-center px-5 py-1 outline outline-1 outline-gray-400 text-gray-400 rounded-lg hover:bg-gray-700 transition-all" type="submit" value="Let's Get Started!  🚀">
+                <div id="progressIndicator" class="w-screen hidden flex-col items-center justify-center"> 
+                    <div class="loader h-fit">
+                        <div class="waveContainer">
+                            <div class="wave one">
+                            </div>
+                            <div class="wave two">
+                            </div>
+                            <div class="wave three">
+                            </div>
+                            <div class="wave four">
+                            </div>
+                            <div class="wave five">
+                            </div>
+                        </div>
+                    </div>                        
+                    <p class="text-gray-700 font-semibold font-poppins">Converting your playlist, please wait...</p>
+                </div> 
             </form>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function spinner() {
-        document.getElementsByClassName("spinner")[0].style.display = "block";
-    }
-</script> 
+<script>
+    document.getElementById('playlistForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Get form values
+        var yt_url = document.getElementById('yt_url').value;
+        var sp_playlist_name = document.getElementById('sp_playlist_name').value;
+
+        // Function to show alert
+        function showAlert(message) {
+            var modal = document.getElementById('customAlert');
+            document.getElementById('alertText').textContent = message;
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+        }
+        
+        // Function to hide alert
+        function hideAlert() {
+            var modal = document.getElementById('customAlert');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+        }
+
+        // Dismiss button
+        document.getElementById('dismissButton').addEventListener('click', function() {
+            hideAlert();
+        });
+
+        window.addEventListener('click', function(event) {
+            var modal = document.getElementById('customAlert');
+            var modalContent = document.querySelector('#alertContent'); 
+            if (!modalContent.contains(event.target)) {
+                hideAlert();
+            }
+        });
+        // Dismiss by typing
+        document.addEventListener('keydown', function() {
+            hideAlert();
+        });
+
+       // Validate YouTube URL
+        var ytPlaylistPattern = /(?:youtube\.com.*(?:\\?|&)list=)([a-zA-Z0-9_-]+)/;
+        if (!yt_url.match(ytPlaylistPattern)) {
+            showAlert('Enter A Valid YouTube Playlist URL');
+            return;
+        }
+        // Validate playlist name
+        if (!sp_playlist_name.trim()) {
+            showAlert('Enter A Playlist Name');
+            return;
+        }
+
+        var formData = new FormData(this);
+
+        fetch('/go', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/success'; 
+            } else {
+                showAlert('Conversion failed.'); 
+                document.getElementById('submitButton').classList.remove('hidden');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred.');
+            document.getElementById('submitButton').classList.remove('hidden');
+        });
+
+        document.getElementById('submitButton').classList.add('hidden');
+        document.getElementById('submitButton').classList.remove('flex');
+        
+        document.getElementById('slogan').classList.add('hidden');
+        document.getElementById('url_div').classList.add('hidden');
+        document.getElementById('name_div').classList.add('hidden');
+        document.getElementById('description_div').classList.add('hidden');
+        
+        document.getElementById('progressIndicator').classList.remove('hidden');
+        document.getElementById('progressIndicator').classList.add('flex');
+
+    });
+</script>
 {% endblock %}
 

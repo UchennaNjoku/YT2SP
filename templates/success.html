@@ -5,22 +5,48 @@
 {% endblock %}
 
 {% block body %}
-<div class="background-container">
-    <img src="../static/src/pexels-scott-webb-1190906.jpg" class="leaf-background" alt="background">
-</div>
-<div class="container">
-    <div class="overall-card">
-        <div class="greeting text-lg">
-            <h1>Success!</h1>
-            <p>We created your playlist</p>
+<div class="h-screen w-screen bg-gradient-to-r from-slate-900 to-slate-950 flex flex-col">
+
+     <nav class="h-1/12 p-4 w-screen flex items-center justify-between">
+        <a href="/" class="text-xl md:text-2xl ml-2 mb-1 bg-gradient-to-r cursor-pointer hover:to-slate-800 transition-all from-slate-800 to-slate-900 bg-clip-text text-transparent font-poppins">yt2sp</h1>
+        <div>
+            <a class="cursor-pointer text-sm md:text-base transition-all hover:text-slate-700 text-slate-800 p-2 font-medium" href="/about">about us</a>
+            <a class="cursor-pointer text-sm md:text-base transition-all hover:text-slate-700 text-slate-800 p-2 font-medium" href="https://github.com/UchennaNjoku">other projects</a>
         </div>
-        <div class="welcome-container">
-            <form action="/index" method = "post">
-                <div class="create-another" >
-                    <input class="submit-button top-btn" type="submit" value="Create another">
-                </div>
-            </form>
-            <a class="submit-button bottom-btn" href="https://open.spotify.com/">View Spotify playlist</a>
+    </nav>
+
+    <div class="flex items-center align-middle self-center justify-center content-center text-center p-10">
+        <div class="space-y-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-20 h-20 text-green-700 mx-auto"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <h1 class="text-3xl font-bold text-white">Conversion Successful!</h1>
+          <p class="mx-auto max-w-xl text-gray-400 text-lg">
+            Your YouTube playlist has been successfully converted to a Spotify playlist. Enjoy your music!
+          </p>
+          <button
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 text-white bg-green-700 hover:bg-green-800"
+            href="https://www.spotify.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Go to Spotify
+          </button>
+          <a href="/" class="block text-center w-full py-2 border text-gray-400 border-gray-600 rounded-md hover:bg-gray-700" href="/">
+            Return to Homepage
+          </a>
+          <footer class="text-gray-500 text-sm">© Yt2Sp YouTube to Spotify Converter</footer>
         </div>
     </div>
 </div>

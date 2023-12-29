@@ -15,3 +15,74 @@
     50% { transform: rotate(8deg); }
     60% { transform: rotate(0deg); }  /* Gentle return to the starting position */
 }
+
+.loader{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Start wave animation classes*/
+.waveContainer {
+    
+    padding: 17%;
+    position: relative; /* or absolute, depending on your layout */
+  }
+  
+  .wave {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #272D3D; /* replace with your desired color */
+    position: relative;
+    top: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  
+  .wave.one {
+    animation: wave 2s ease-in-out 0s infinite;
+  }
+  
+  .wave.two {
+    animation: wave 2s ease-in-out .2s infinite;
+  }
+
+  .wave.three {
+    animation: wave 2s ease-in-out .4s infinite;
+  } 
+
+  .wave.four {
+    animation: wave 2s ease-in-out .6s infinite;
+  }
+
+  .wave.five {
+    animation: wave 2s ease-in-out .8s infinite;
+  }
+
+
+  @keyframes wave {
+    0% {
+      top: 0;
+    }
+    10% {
+      top: -20px;
+      background-color: #191D32; /* replace with your desired color */
+    }
+    20% {
+    }
+    30% {
+      top: 20px;
+    }
+    50% {
+    }
+    60% {
+      top: -10px;
+    }
+    90% {
+      top: 0;
+    }
+}
+
+

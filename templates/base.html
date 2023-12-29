@@ -9,10 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/src/styles.css') }}">
-
-    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
 </head>
-<body>
+<body class="overflow-hiddem">
     {% block body %}{% endblock %}
 </body>
 </html>

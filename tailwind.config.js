@@ -8,6 +8,10 @@ module.exports = {
     extend: {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
+      },
+      colors: {
+        calpolygreen1: "#294525",
+        calpolygreen2: "#274029"
       }
     },
   },
