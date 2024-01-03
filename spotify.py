@@ -27,18 +27,17 @@ class Spotify:
         self.user_id = getenv('SPOTIPY_USER_ID', None)
         self.client_id = getenv('SPOTIPY_CLIENT_ID', None)
         self.client_secret = getenv('SPOTIPY_CLIENT_SECRET', None)
-        self.redirect_uri = 'http://localhost:8888/callback'
+        self.redirect_uri = getenv('REDIRECT_URI', None)
+        # self.redirect_uri = 'http://localhost:8888/callback'
 
     @property
     def token(self):
-
-        # Return the access tokenu
         token = util.prompt_for_user_token(
             username=self.username,
             scope=self.scope,
             client_id=self.client_id,
             client_secret=self.client_secret,
-            redirect_uri='http://localhost:8888/callback')
+            redirect_uri=self.redirect_uri)
         return token
 
     def get_song_uri(self, artist: str, song_name: str, access_token):

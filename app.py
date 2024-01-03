@@ -21,10 +21,10 @@ sp = Spotify()
 yt = Youtube()
 
 API_BASE = 'https://accounts.spotify.com'
-REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
 SCOPE = 'playlist-modify-public'
 SHOW_DIALOG = True
 
+REDIRECT_URI = getenv('REDIRECT_URI', None)
 CLIENT_ID = getenv('SPOTIPY_CLIENT_ID', None)
 CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET', None)
 
@@ -54,7 +54,7 @@ def api_callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"http://127.0.0.1:5000/api_callback",
+        "redirect_uri":REDIRECT_URI,
         "client_id":CLIENT_ID,
         "client_secret":CLIENT_SECRET
         })
@@ -69,7 +69,6 @@ def api_callback():
 @app.route("/go", methods=['POST'])
 def go():
     try:
-        print(request.form)
         
         sp_playlist_name = request.form['sp_playlist_name']
         sp_playlist_description = request.form['sp_playlist_description']
