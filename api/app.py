@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, make_response, session, redirect, url_for, jsonify
-from api.spotify import Spotify
-from api.youtube import Youtube, Song
+from spotify import Spotify
+from youtube import Youtube, Song
 from pprint import pprint
 from youtube_title_parse import get_artist_title
 from os import getenv
