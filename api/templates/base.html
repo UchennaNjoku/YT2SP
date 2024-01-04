@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/src/styles.css') }}">
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='./favicon.svg') }}">
 </head>
 <body class="overflow-hiddem">
     {% block body %}{% endblock %}
