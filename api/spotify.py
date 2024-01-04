@@ -5,18 +5,6 @@ from os import getenv
 from dotenv import load_dotenv
 
 
-# load_dotenv()
-
-# SPOTIPY_USER_ID = getenv('SPOTIPY_USER_ID', None)
-# assert SPOTIPY_USER_ID
-# SPOTIPY_CLIENT_ID = getenv('SPOTIPY_CLIENT_ID', None)
-# assert SPOTIPY_CLIENT_ID
-# SPOTIPY_CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET', None)
-# assert SPOTIPY_CLIENT_SECRET
-
-# checking the env files
-# print(SPOTIPY_USER_ID, SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
-
 class Spotify:
 
     load_dotenv()
