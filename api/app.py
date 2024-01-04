@@ -4,14 +4,12 @@ from .youtube import Youtube, Song
 from pprint import pprint
 from youtube_title_parse import get_artist_title
 from os import getenv
-from dotenv import load_dotenv
 import requests
-import time
 from flask_cors import CORS
 
 
 
-load_dotenv()
+
 app = Flask(__name__)
 app.secret_key="sessionkey"
 
@@ -24,9 +22,9 @@ API_BASE = 'https://accounts.spotify.com'
 SCOPE = 'playlist-modify-public'
 SHOW_DIALOG = True
 
-REDIRECT_URI = getenv('REDIRECT_URI', None)
-CLIENT_ID = getenv('SPOTIPY_CLIENT_ID', None)
-CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET', None)
+REDIRECT_URI = getenv('REDIRECT_URI')
+CLIENT_ID = getenv('SPOTIPY_CLIENT_ID')
+CLIENT_SECRET = getenv('SPOTIPY_CLIENT_SECRET')
 
 
 @app.route("/")
@@ -117,4 +115,4 @@ def about():
     return render_template('about.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

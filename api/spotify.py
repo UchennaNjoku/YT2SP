@@ -1,22 +1,18 @@
 from spotipy import util 
 import requests
-from pprint import pprint
 from os import getenv
-from dotenv import load_dotenv
+
 
 
 class Spotify:
 
-    load_dotenv()
-
     def __init__(self):
         self.scope = 'playlist-modify-public'
-        self.username = getenv('SPOTIPY_USER_ID', None)
-        self.user_id = getenv('SPOTIPY_USER_ID', None)
-        self.client_id = getenv('SPOTIPY_CLIENT_ID', None)
-        self.client_secret = getenv('SPOTIPY_CLIENT_SECRET', None)
-        self.redirect_uri = getenv('REDIRECT_URI', None)
-        # self.redirect_uri = 'http://localhost:8888/callback'
+        self.username = getenv('SPOTIPY_USER_ID')
+        self.user_id = getenv('SPOTIPY_USER_ID')
+        self.client_id = getenv('SPOTIPY_CLIENT_ID')
+        self.client_secret = getenv('SPOTIPY_CLIENT_SECRET')
+        self.redirect_uri = getenv('REDIRECT_URI')
 
     @property
     def token(self):
@@ -84,9 +80,3 @@ class Spotify:
             }
         )
         return response
-
-# sp = Spotify()
-# token = sp.token
-# id_of_playlist = sp.create_playlist()
-# uri_of_song = sp.get_song_uri('Future', 'I Thank U')
-# res = sp.add_song_to_playlist(uri_of_song, id_of_playlist)

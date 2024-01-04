@@ -2,9 +2,8 @@ from googleapiclient.discovery import build
 from youtube_title_parse import get_artist_title
 from dataclasses import dataclass
 import re
-from pprint import pprint
 from os import getenv
-from dotenv import load_dotenv
+
 
 @dataclass
 class Song: 
@@ -13,7 +12,6 @@ class Song:
 
 class Youtube:
 
-    load_dotenv()
 
     def clean_song_info(self, song: Song) -> Song:
         artist, title = song.artist, song.title
@@ -40,7 +38,7 @@ class Youtube:
     def get_playlist_response(self, playlist_identification):
 
         #  queries the youtube api for playlist items
-        youtube_api_key = getenv('YOUTUBE_DEVELOPER_KEY', None)
+        youtube_api_key = getenv('YOUTUBE_DEVELOPER_KEY')
         youtube = build('youtube', 'v3', developerKey=youtube_api_key)
         request = youtube.playlistItems().list(
         part = 'snippet',  playlistId = playlist_identification,
